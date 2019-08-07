@@ -7,18 +7,18 @@ node {
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
-       sh 'npm install --only=dev'
-       sh 'npm test'
+       sh 'cd basics && npm install --only=dev'
+       sh 'cd basics && npm test'
      }
    }
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v1/', 'lihen52') {
-       def app = docker.build("lihen52/docker-nodejs-demo:${commit_id}", '.').push()
+       def app = docker.build("lihen52/docker-cicd:${commit_id}", './basics').push()
      }
    }
    stage('docker run') {
      sh label: '', script: '''docker rm docker_test
-      docker run --rm -tid --name docker_test -p 3000 lihen52/docker-nodejs-demo:latest
+      docker run --rm -tid --name docker_test -p 3000 lihen52/docker-cicd:latest
       docker kill docker_test
       
       '''
