@@ -32,6 +32,7 @@ job('NodeJS Docker example') {
     }
     steps {
         dockerBuildAndPublish {
+            buildcontaxt('./basics/')
             repositoryName('lihen52/cicd') //qa / dev
             tag('${GIT_REVISION,length=9}')
             registryCredentials('dockerhub')
