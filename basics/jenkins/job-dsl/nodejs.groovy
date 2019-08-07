@@ -59,10 +59,10 @@ pipelineJob('DSL_Pipeline') {
         git {
           remote { url(repo) }
           branches('master', '**/feature*')
-          scriptPath('./basics/misc/jenkinsfile')
           extensions { }  // required as otherwise it may try to tag the repo, which you may not want
         }
       }
+      scriptPath('./basics/misc/Jenkinsfile')
     }
   }
 }
