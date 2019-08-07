@@ -18,7 +18,7 @@ node {
    }
    stage('docker run') {
      sh label: '', script: '''
-      docker run --rm -tid --name docker_test -p 3000 lihen52/docker-cicd:latest
+      docker run --rm -tid --name docker_test -p 3000 lihen52/cicd:latest
       
       docker kill docker_test
       
